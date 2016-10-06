@@ -1,23 +1,10 @@
 
 AUTOMAKE_OPTIONS=foreign subdir-objects
 
-if IS_DEBUGON
 SUBDIRS= \
     include \
     src/main/cpp/lucida \
-    src/test/cpp/lucida \
-	djinntonic/imc \
-	djinntonic/dig \
-	djinntonic/face
-else
-SUBDIRS= \
-    include \
-    src/main/cpp/lucida \
-    src/test/cpp/lucida \
-	djinntonic/imc \
-	djinntonic/dig \
-	djinntonic/face
-endif
+    src/test/cpp/lucida
 
 EXTRADIST=\
 	settings.gradle \

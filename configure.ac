@@ -95,8 +95,8 @@ AC_MSG_CHECKING([gRPC plugin])
 AC_MSG_RESULT([$CPP_PLUGIN])
 
 CAFFE_CXXFLAGS=`./scripts/caffe_cxxflags.sh`
-CAFFE_INCLUDE_DIR = ${ac_top_srcdir}/../deps/caffe/BUILD/caffe/install/include
-CAFFE_LIB_DIR = ${ac_top_srcdir}/../deps/caffe/BUILD/caffe/install/lib
+CAFFE_INCLUDE_DIR='$(top_srcdir)/deps/caffe/BUILD/caffe/install/include'
+CAFFE_LIB_DIR='$(top_srcdir)/deps/caffe/BUILD/caffe/install/lib'
 
 AM_COND_IF([PLATFORM_DARWIN],
 	[OSX_BREW="`which brew`";OSX_PORT="`which port`";])
@@ -122,9 +122,6 @@ AC_CONFIG_FILES(
     include/Makefile
     src/main/cpp/lucida/Makefile
     src/test/cpp/lucida/Makefile
-	djinntonic/face/Makefile
-	djinntonic/imc/Makefile
-	djinntonic/dig/Makefile
     ])
 
 AC_SUBST(AM_CXXFLAGS)
