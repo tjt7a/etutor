@@ -26,8 +26,8 @@ cd $BUILDPATH/ENV &&
 source vpython/bin/activate
 pip install --upgrade distribute
 pip install --upgrade pip
-pip install -r $ROOTPATH/../tools/python_requirements.txt
-pip install grpcio
-pip install grpcio-tools
+pip install -r python_requirements.txt
+pip install grpcio==1.0.0
+pip install grpcio-tools==1.0.0
 pip install --upgrade numpy
 deactivate
