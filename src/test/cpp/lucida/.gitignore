@@ -1,0 +1,4 @@
+.deps
+*.o
+*.lo
+lucida_test
