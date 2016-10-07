@@ -1,4 +1,4 @@
-package lucida.test;
+package ai.lucida.openephyra;
 
 //Java packages
 import java.util.List;
@@ -14,7 +14,7 @@ import ai.lucida.grpc.QuerySpec;
 import ai.lucida.grpc.QueryInput;
 import ai.lucida.grpc.Request;
 
-import ai.lucida.qa.QAServiceHandler;
+import ai.lucida.openephyra.QAServiceHandler;
 
 import com.google.protobuf.ByteString;
 

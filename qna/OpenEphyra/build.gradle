@@ -1,0 +1,26 @@
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'OpenEyphra',
+                   'Implementation-Version': version
+    }
+}
+
+dependencies {
+	compile fileTree(dir: 'lib/nlp', include: ['*.jar'])
+	compile fileTree(dir: 'lib/util', include: ['*.jar'])
+	compile fileTree(dir: 'lib/search', include: ['*.jar'])
+	compile fileTree(dir: 'lib/db', include: ['*.jar'])
+	compile fileTree(dir: 'lib/qa', include: ['*.jar'])
+	compile fileTree(dir: 'lib/ml', include: ['*.jar'])
+	compile fileTree(dir: 'lib/learn', include: ['*.jar'])
+	//compile fileTree(dir: 'lib/thrift', include: ['*.jar'])
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src']
+		}
+	}
+}
+

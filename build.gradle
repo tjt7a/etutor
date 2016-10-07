@@ -1,10 +1,35 @@
-apply plugin: 'java'
 apply plugin: 'com.google.protobuf'
 
-// If using TLS then change to 1.8
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-version = '0.1.0'
+// FIXME: This should be set globally during configuration of deps
+def grpcVersion = '1.0.0'
+
+// Use allprojects scope so dependencies are passed down to subprojects.
+allprojects {
+	apply plugin: 'java'
+
+	// If using TLS then change to 1.8
+	//sourceCompatibility = 1.7
+	//targetCompatibility = 1.7
+	version = '0.1.0'
+	group = 'ai.lucida'
+
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+	dependencies {
+		testCompile 'junit:junit:4.12'
+	}
+}
+
+// All subprojects depend on the root project
+subprojects {
+	//startScripts.enabled = false
+
+	dependencies {
+		compile project(':')
+	}
+}
 
 jar {
     manifest {
@@ -25,31 +50,18 @@ buildscript {
 	}
 }
 
-repositories {
-	mavenCentral()
-	mavenLocal()
-}
-
-// FIXME: This should be set globally during configuration of deps
-def grpcVersion = '1.0.0'
-
-// Use allprojects scope so dependencies are passed down to subprojects.
-/*
-allprojects {
-    dependencies {
-        compile "io.grpc:grpc-netty:${grpcVersion}"
-        compile "io.grpc:grpc-protobuf:${grpcVersion}"
-        compile "io.grpc:grpc-stub:${grpcVersion}"
-        compile "org.slf4j:slf4j-simple:1.7.21"
-    }
-}*/
-
 // Root project dependencies
 dependencies {
-        compile "io.grpc:grpc-netty:${grpcVersion}"
-        compile "io.grpc:grpc-protobuf:${grpcVersion}"
-        compile "io.grpc:grpc-stub:${grpcVersion}"
-        compile "org.slf4j:slf4j-simple:1.7.21"
+	compile "io.grpc:grpc-netty:${grpcVersion}"
+	compile "io.grpc:grpc-protobuf:${grpcVersion}"
+	compile "io.grpc:grpc-stub:${grpcVersion}"
+	compile "org.slf4j:slf4j-simple:1.7.21"
+}
+
+project(':qna') {
+	dependencies {
+		compile project(':qna:OpenEphyra')
+	}
 }
 
 protobuf {
@@ -90,10 +102,6 @@ idea {
 		sourceDirs += file("${rootDir}/build/generated/source/proto/main/grpc");
 	}
 }
-
-// Provide convenience executables for trying out the examples.
-//apply plugin: 'application'
-//startScripts.enabled = false
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14'

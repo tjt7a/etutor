@@ -1,7 +1,5 @@
-/bin1/
-/bin/
-db/*
-.classpath
-.project
-src/lucida/thrift
-
+/bin
+/db
+/.classpath
+/.project
+/build

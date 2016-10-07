@@ -1,7 +1,7 @@
 package ai.lucida.openephyra;
 
 import ai.lucida.grpc.ServiceAcceptor;
-import ai.lucida.qa.QAServiceHandler;
+import ai.lucida.openephyra.QAServiceHandler;
 
 /**
  * Starts the question-answer server and listens for requests.
