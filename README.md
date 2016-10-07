@@ -1,7 +1,7 @@
 # eTutor
 
 eTutor is a intelligent tutoring assistant inspired by
-[lucida](http://lucida.ai). The project is released under 
+[Lucida](http://lucida.ai). The project is released under 
 [BSD license](LICENSE), except certain submodules contain their own 
 specific licensing information.
 
@@ -24,7 +24,7 @@ ways:
   The site determines which services are needed based on the user input,
   sends requests to them, and returns response to the user.
   
-- `deps`: dependencies necessary for compiling eTutoe.
+- `deps`: dependencies necessary for compiling eTutor.
   Due to the fact that services share some common dependencies,
   all services should be compiled after these dependencies are installed.
   
@@ -68,8 +68,8 @@ create a whole bunch of files in the build tree owned by root.
 ### Java Support
 
 Many of the backend services run on Java. Java source is built using
-gradle. The make system runs gradle to create the java backend services.
-If you want to build java without make then run `gradle build`. 
+gradle. The make system runs gradle to create the java backend services
+but if you want to build java without make then run `gradle build`. 
 
 #### Build Javadocs
 
@@ -77,8 +77,8 @@ Run `gradle alljavadoc`. The docs will be located at build/doc/.
 
 #### IntelliJ Integration for Java Code
 
-The file [build.gradle](build.gradle) uses the idea plugin. To create
-your IDEA project run `gradle idea`. To rebuild the project run
+The root project file [build.gradle](build.gradle) uses the idea plugin.
+To create your IDEA project run `gradle idea`. To rebuild the project run
 `gradle cleanIdea idea`.
  
 ### Testing
@@ -90,10 +90,10 @@ To execute all tests run `make test`.
 ### Java Services Based on Existing Source
 
 1. Create a new directory under the top level directory. Name it according
-   to the service provided. We refer to is a <service-name>.
-2. Add the build tree for the existing source as a subdir of <service-name>.
+   to the service provided. We refer to it as \<service-name\>.
+2. Add the build tree for the existing source as a subdir of \<service-name\>.
    Add a build.gradle to this directory.
-3. Create a build.gradle file in <service-name>. Use the file [qna/build.gradle](qna/build.gradle)
+3. Create a build.gradle file in \<service-name\>. Use the file [qna/build.gradle](qna/build.gradle)
    as a reference.
 4. Add the new projects to [settings.gradle](settings.gradle).
 
@@ -103,5 +103,5 @@ TODO:
 
 ### New C++ Services
 
-Add your source code to src/main/cpp/<backend-component-name>. Add your 
-tests to src/test/cpp/<backend-component-name>
+Add your source code to src/main/cpp/\<backend-component-name\>. Add your 
+tests to src/test/cpp/\<backend-component-name\>
