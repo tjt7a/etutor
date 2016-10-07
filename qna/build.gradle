@@ -2,3 +2,7 @@ apply plugin: 'application'
 
 mainClassName = 'ai.lucida.qa.QADaemon'
 
+dependencies {
+	compile project(':qna:OpenEphyra')
+}
+
