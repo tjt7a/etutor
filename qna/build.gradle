@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'ai.lucida.qa.QADaemon'
+
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+    compile project(':')
+	compile project(':qna:OpenEphyra')
+}
