@@ -87,7 +87,7 @@ To execute all tests run `make test`.
 
 ## Adding Backend Services
 
-### Java Services Based on Existing Source
+### Java Services Based on Externl Source
 
 1. Create a new directory under the top level directory. Name it according
    to the service provided. We refer to it as \<service-name\>.
@@ -96,6 +96,26 @@ To execute all tests run `make test`.
 3. Create a build.gradle file in \<service-name\>. Use the file [qna/build.gradle](qna/build.gradle)
    as a reference.
 4. Add the new projects to [settings.gradle](settings.gradle).
+
+
+For example:
+```
+qna[+] <service-name=qna>
+    |
+    +-- build.gradle
+    |
+    +-- OpenEphyra [+]- build.gradle
+    |               |
+    |               '-- (external sourcetree)
+    |
+    +-- src [+] -- main/java/ai/lucida/openephyra [+]
+             |                                     |
+             |                                     '-- source for qna gRPC service
+             |
+             '---- test/java/ai/lucida/openephyra [+]
+                                                   |
+                                                   '-- tests for qna gRPC service
+```
 
 ### C++ Services Based on Existing Source
 
