@@ -28,7 +28,7 @@ import opennlp.tools.postag.POSDictionary;
  * <p>This class provides a common interface to the
  * <a href="http://opennlp.sourceforge.net/">OpenNLP</a> toolkit.</p>
  * 
- * <p>It supports the following natural language processing tools:
+ * <p>It supports the following natural language processing tools:</p>
  * <ul>
  * <li>Sentence detection</li>
  * <li>Tokenization/untokenization</li>
@@ -37,7 +37,6 @@ import opennlp.tools.postag.POSDictionary;
  * <li>Full parsing</li>
  * <li>Coreference resolution</li>
  * </ul>
- * </p>
  * 
  * @author Nico Schlaefer
  * @version 2006-05-20

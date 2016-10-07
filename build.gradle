@@ -17,8 +17,15 @@ allprojects {
 		mavenCentral()
 		mavenLocal()
 	}
+
 	dependencies {
 		testCompile 'junit:junit:4.12'
+	}
+
+	if (JavaVersion.current().isJava8Compatible()) {
+		tasks.withType(Javadoc) {
+			options.addStringOption('Xdoclint:none', '-quiet')
+		}
 	}
 }
 
@@ -100,6 +107,23 @@ idea {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14'
 }
+
+def exportedProjects= [
+	":",
+	":qna",
+	":qna:OpenEphyra",
+]
+
+task alljavadoc(type: Javadoc) {
+	source exportedProjects.collect { project(it).sourceSets.main.allJava }
+	classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
+		destinationDir = file("${buildDir}/docs/javadoc")
+}
+/*
+task myJavadocs(type: Javadoc) {
+	source = sourceSets.main.allJava
+}
+*/
 
 // Create gRPC interfaces for otherlanguages
 task grpcOther() {

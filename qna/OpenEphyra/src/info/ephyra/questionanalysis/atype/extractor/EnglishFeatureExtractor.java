@@ -200,30 +200,28 @@ public class EnglishFeatureExtractor extends FeatureExtractor{
     }
 
     /**
-     * Creates and populates an Instance from a QuestionAnalysis object.  All
+     * <p>Creates and populates an Instance from a QuestionAnalysis object.  All
      * features are binary features of one of the following types:</p>
      * 
      * Word-level features:
      * <ul>
-     *   <li>UNIGRAM : individual words in the question
-     *   <li>BIGRAM : pairs of adjacent words in the question
-     *   <li>WH_WORD : the wh-word in the question if one exists
+     *   <li>UNIGRAM : individual words in the question</li>
+     *   <li>BIGRAM : pairs of adjacent words in the question</li>
+     *   <li>WH_WORD : the wh-word in the question if one exists</li>
      * </ul>
      * 
      * Syntactic features:
      * <ul>
-     *   <li>MAIN_VERB: the syntactic head of the sentence, as defined in 
-     *   {@link edu.cmu.lti.chineseNLP.util.TreeHelper TreeHelper}
-     *   <li>FOCUS_ADJ : the adjective following a wh-word (e.g. 'long' in 'How long is it?') 
-     *   <li>WH_DET : whether or not the wh-word is the determiner of a noun phrase, as in 'which printer'
+     *   <li>MAIN_VERB: the syntactic head of the sentence, as defined in</li> 
+     *   {@link edu.cmu.lti.chineseNLP.util.TreeHelper TreeHelper}</li>
+     *   <li>FOCUS_ADJ : the adjective following a wh-word (e.g. 'long' in 'How long is it?')</li>
+     *   <li>WH_DET : whether or not the wh-word is the determiner of a noun phrase, as in 'which printer'</li>
      * </ul>
      * 
      * Semantic features:
      * <ul>
-     *   <li>FOCUS_TYPE : the semantic type of the focus word, 
+     *   <li>FOCUS_TYPE : the semantic type of the focus word.</li>
      * </ul>
-     * 
-     * @throws Exception
      */
     public Instance createInstance(List<Term> terms, String parseTree){
         String question = "";

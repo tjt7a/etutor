@@ -56,17 +56,17 @@ public class WordNetAnswerTypeMapping {
     /**
      * Initializes static resources.  The input properties that must be defined are:
      * <ul>
-     *   <li>jwnl.configuration : </p>&nbsp; the location of the configuration file for JWNL
+     *   <li>jwnl.configuration : &nbsp; the location of the configuration file for JWNL</li>
      *   <li>edu.cmu.lti.javelin.qa.english.WordNetAnswerTypeMapping.mapFile :
-     *   <p>&nbsp; the location of the file specifying a mapping from WordNet synsets
+     *   &nbsp; the location of the file specifying a mapping from WordNet synsets
      *   to answer subtypes.  The one-to-many mapping must be specified  
      *   one element per line, with the domain and range values separated by a comma. 
      *   Blank lines and lines beginning with "#" are ignored.  WordNet synsets must be
      *   represented by concatenating the list of lemmas in the synset, separating them 
      *   with a dash ("-"), followed by another "-" and the database file offset of the synset.
-     *   (Note: this offset value will vary with the version of WordNet used.)</p>
-     *   &nbsp; Thus, an example of an element of the mapping is:</p>
-     *     <code>body_of_water-water-8651117,ocean</code>
+     *   (Note: this offset value will vary with the version of WordNet used.)
+     *   &nbsp; Thus, an example of an element of the mapping is:
+     *     <code>body_of_water-water-8651117,ocean</code></li>
      * </ul>
      * @throws Exception if one of the required properties is not defined.
      */

@@ -476,7 +476,7 @@ public class AnswerPatternFilter extends Filter {
 	/**
 	 * Assesses the answer patterns by applying them to the answer string of the
 	 * <code>Result</code> object and comparing the extracted answers to the
-	 * regular expression <cdoe>regex</code>.
+	 * regular expression <code>regex</code>.
 	 * 
 	 * @param result <code>Result</code> object
 	 * @param regex regular expression that describes a correct answer

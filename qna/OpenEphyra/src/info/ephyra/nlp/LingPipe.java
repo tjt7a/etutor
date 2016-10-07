@@ -14,12 +14,11 @@ import com.aliasi.tokenizer.TokenizerFactory;
  * <p>This class provides a common interface to the
  * <a href="http://www.alias-i.com/lingpipe/">LingPipe</a> toolkit.</p>
  * 
- * <p>It supports the following natural language processing tools:
+ * <p>It supports the following natural language processing tools:</p>
  * <ul>
  * <li>Tokenization</li>
  * <li>Sentence detection</li>
  * </ul>
- * </p>
  * 
  * @author Nico Schlaefer
  * @version 2006-11-25

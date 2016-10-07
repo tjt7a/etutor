@@ -6,13 +6,13 @@ import info.ephyra.nlp.semantics.ontologies.WordNet;
 import info.ephyra.search.Result;
 
 /**
- * <p>A filter that drops a result if the answer string
+ * <p>A filter that drops a result if the answer string</p>
  * <ul>
  *   <li>contains only function words and single characters (except digits)</li>
  *   <li>contains an interrogative</li>
  *   <li>contains a single bracket or quotation mark</li>
  *   <li>is an adverb</li>
- * </ul></p>
+ * </ul>
  * 
  * <p>This filter is not applied to answer strings that have been extracted with
  * a rule- or list-based NE tagger since these answers are assumed to be

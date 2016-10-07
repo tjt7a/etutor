@@ -11,14 +11,14 @@ import java.util.Hashtable;
 
 /**
  * <p>A filter that truncates the answer strings. It drops the following
- * prefixes and suffixes:
+ * prefixes and suffixes:</p>
  * <ul>
  *   <li>blanks and some special characters</li>
  *   <li>articles</li>
  *   <li>"and", "or"</li>
  *   <li>prepositions</li>
  * </ul>
- * After truncation, similar answers are merged.</p>
+ * <p>After truncation, similar answers are merged.</p>
  * 
  * <p>This filter is not applied to answer strings that have been extracted with
  * a rule- or list-based NE tagger since these answers are assumed to be

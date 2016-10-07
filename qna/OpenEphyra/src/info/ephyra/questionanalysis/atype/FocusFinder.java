@@ -98,26 +98,26 @@ public class FocusFinder {
     }
     
     /**
-     * Finds the focus, or target, word of a question using the specified tree
+     * <p>Finds the focus, or target, word of a question using the specified tree
      * templates and default rules that look for question words.</p>
      * 
-     * Using the following algorithm:</p>
+     * <p>Using the following algorithm:</p>
      * <ol>
      *   <li> Look for the head word of a phrase that has a wh-word child and 
-     *   more than one sibling
+     *   more than one sibling</li>
      *   <ul>
      *     <li> look for the object of a modifying of-<code>PP</code> if the word
-     *      is "kind" or "type"
+     *      is "kind" or "type"</li>
      *   </ul>
      *   <li> Try to extract a node using the specified tree templates in the order 
-     *   they appear in the file
+     *   they appear in the file</li>
      *   <li> Using only preterminals, look for the last consecutive <code>NN*</code> 
-     *   or <code>JJ</code> that follows a <code>WDT</code> or <code>WP</code>
+     *   or <code>JJ</code> that follows a <code>WDT</code> or <code>WP</code></li>
      *   <li> Using only preterminals, look for the last consecutive <code>NN*</code> 
-     *   that follows the terminals, "how many".   
+     *   that follows the terminals, "how many".</li>
      * </ol>
      * 
-     * the focus word is returned as soon as one is found.</p>
+     * <p>The focus word is returned as soon as one is found.</p>
      * 
      * @param tree The syntactic parse tree of the question
      * @return the focus word, or <code>null</code> if none was found

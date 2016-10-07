@@ -9,7 +9,7 @@ import info.ephyra.search.Result;
  * <p>The score of each result is incremented by the number of keywords it
  * contains.</p>
  * 
- * <p>A result is dropped if <code>m < Floor(Sqrt(k - 1)) + 1</code>, where
+ * <p>A result is dropped if <code>m &lt; Floor(Sqrt(k - 1)) + 1</code>, where
  * <code>k</code> is the number of keywords in the query string and
  * <code>m</code> is the number of keywords that also occur in the result.</p>
  * 
