@@ -117,7 +117,7 @@ public final class ServiceConnector {
 	/**
 	 * Stub accessor.
 	 *
-	 * @return The furure stub for this client.
+	 * @return The future stub for this client.
 	 */
 	LucidaServiceGrpc.LucidaServiceFutureStub getFutureStub() {
 		return futureStub_;
@@ -158,7 +158,6 @@ public final class ServiceConnector {
 	 * Create an intelligent instance based on supplied id.
 	 *
 	 * @param  id   The LUCID.
-	 * @return True if successful.
 	 */
 	public void create(String id) throws UnknownServiceException {
 		logger.info("{} {}", ServiceNames.createCommandName, id);
@@ -178,7 +177,6 @@ public final class ServiceConnector {
 	/**
 	 * General blocking request for learn. Building is left to the caller.
 	 * @param  request	The request.
-	 * @return True if successful.
 	 */
 	public void learn(Request request) throws UnknownServiceException {
 		try {

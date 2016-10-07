@@ -94,6 +94,10 @@ protobuf {
 apply plugin: 'idea'
 
 idea {
+	project {
+		languageLevel = '1.7'
+		vcs = 'Git'
+	}
 	module {
 		// Not using generatedSourceDirs because of
 		// https://discuss.gradle.org/t/support-for-intellij-2016/15294/8
@@ -101,6 +105,8 @@ idea {
 		// sourceDirs += file("${projectDir}/build/generated/source/proto/main/grpc");
 		sourceDirs += file("${rootDir}/build/generated/source/proto/main/java");
 		sourceDirs += file("${rootDir}/build/generated/source/proto/main/grpc");
+		downloadJavadoc = true
+		downloadSources = true
 	}
 }
 

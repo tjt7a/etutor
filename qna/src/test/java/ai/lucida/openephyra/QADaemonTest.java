@@ -18,11 +18,15 @@ import ai.lucida.openephyra.QAServiceHandler;
 
 import com.google.protobuf.ByteString;
 
-/** 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test; 
+
+/*
  * A testing Client that sends a single query to OpenEphyra Server and prints the results.
  */
-public class QAClient {
-	/**
+public class QADaemonTest {
+	/*
 	 * Creates a QueryInput.
 	 */
 	private static final QueryInput createQueryInput(
@@ -36,7 +40,7 @@ public class QAClient {
 				.build();
 	}
 
-	/**
+	/*
 	 * Creates a QuerySpec.
 	 */
 	private static final QuerySpec createQuerySpec(
@@ -48,59 +52,37 @@ public class QAClient {
 				.build();
 	}
 
-	public static void main(String [] args) {
+	@Test
+	public void testClientServer() {
 		// Collect the port number.
 		int port = 8083;
 
-		if (args.length >= 1) {
-			port = Integer.parseInt(args[0]);
-		}
-
+		// User.
+		String LUCID = "Clinc";
+		ServiceAcceptor server = null;
 		try {
-			// User.
-			String LUCID = "Clinc";
-
 			// Knowledge.
-			final QueryInput knowledge_text = createQueryInput( 
-					"text",
-					"Clinc is created by Jason and Lingjia.",
-					"1234567");
-			final QueryInput knowledge_url = createQueryInput(
-					"url",
-					"https://en.wikipedia.org/wiki/Apple_Inc.",
-					"abcdefg");	
-			final ArrayList<QueryInput> knowledge = new ArrayList<QueryInput>() {{
-						add(knowledge_text);
-						add(knowledge_url);
-					}};
+			QueryInput knowledge_text = createQueryInput("text", "Clinc is created by Jason and Lingjia.", "1234567");
+			QueryInput knowledge_url = createQueryInput("url", "https://en.wikipedia.org/wiki/Apple_Inc.", "abcdefg");
+			ArrayList<QueryInput> knowledge = new ArrayList<QueryInput>() {{
+				add(knowledge_text);
+				add(knowledge_url);
+			}};
 			// Unlearn.
-			final QueryInput knowledge_unlearn_input = createQueryInput(
-					"unlearn",
-					"",
-					"abcdefg");
-			final QuerySpec knowledge_unlearn_spec = createQuerySpec(
+			QueryInput knowledge_unlearn_input = createQueryInput("unlearn", "", "abcdefg");
+			QuerySpec knowledge_unlearn_spec = createQuerySpec(
 					"unlearn knowledge",
 					new ArrayList<QueryInput>() {{
 						add(knowledge_unlearn_input);
 					}});
 
 			// Query.
-			final QueryInput query_input = createQueryInput(
-					"text",
-					"Who created Clinc?",
-					"");
-			final ArrayList<QueryInput> query = new ArrayList<QueryInput>() {{
-						add(query_input);
-					}};
-			/*
-			final QuerySpec query = createQuerySpec(
-					"query",
-					new ArrayList<QueryInput>() {{
-						add(query_input);
-					}});
-			*/
+			QueryInput query_input = createQueryInput("text", "Who created Clinc?", "");
+			ArrayList<QueryInput> query = new ArrayList<QueryInput>() {{
+				add(query_input);
+			}};
 
-			ServiceAcceptor server = new ServiceAcceptor(port, new QAServiceHandler());
+			server = new ServiceAcceptor(port, new QAServiceHandler());
 			server.start();
 			System.out.println("QA at port " + port);
 
@@ -120,8 +102,8 @@ public class QAClient {
 			System.out.println(request.getSpec().getContent(0).getData(0).toString("UTF-8"));
 			String answer = client.infer(request);
 			// Print the answer.
-			System.out.println("///// Answer: /////");
 			System.out.println(answer);
+			assertTrue(answer == "Clinc is created by Jason and Lingjia.");
 
 			// Unlearn and ask again.
 			System.out.println("///// Unlearn knowledge /////");
@@ -135,13 +117,15 @@ public class QAClient {
 			answer = client.infer(request);
 			// Print the answer.
 			System.out.println("///// Answer: /////");
+			assertTrue(answer == "");
 			System.out.println(answer);
 
 			client.shutdown(10);
-			server.stop();
-
-		} catch (Exception x) {
-			x.printStackTrace();
+		} catch (Exception e) {
+			fail(e.getMessage());
 		}
+
+		if (server != null)
+			server.stop();
 	}
 }
