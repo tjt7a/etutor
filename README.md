@@ -69,17 +69,30 @@ create a whole bunch of files in the build tree owned by root.
 
 Many of the backend services run on Java. Java source is built using
 gradle. The make system runs gradle to create the java backend services
-but if you want to build java without make then run `gradle build`. 
+but if you want to build java without make then run:
+
+- `gradle build`: to build and run tests with minimal output.
+- `gradle build --info`: to build and run tests displaying stdout and log 
+   messages during test.
+- `gradle build -x test`: build without running tests.
+- `gradle test [--info]`: just run tests.
+
+The QADaemonTest can take over 30 seconds if an error occurs so use
+the `--info`option to see what is happening. 
 
 #### Build Javadocs
 
 Run `gradle alljavadoc`. The docs will be located at build/docs/. 
 
-#### IntelliJ Integration for Java Code
+#### IntelliJ IDEA Integration for Java Code
 
 The root project file [build.gradle](build.gradle) uses the idea plugin.
 To create your IDEA project run `gradle idea`. To rebuild the project run
 `gradle cleanIdea idea`.
+
+Open IDEA and load the project at the root level. When you open the first
+time a warning message will appear saying "unlinked gradle project".
+Click on that message and import the gradle project.
  
 ### Testing
 
