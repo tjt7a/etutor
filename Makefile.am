@@ -30,7 +30,7 @@ reinit: clean
 	autoreconf -f
 
 all-local:
-	gradle build
+	gradle build -x test
 
 clean-local:
 	gradle clean
