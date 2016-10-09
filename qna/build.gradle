@@ -6,3 +6,7 @@ dependencies {
 	compile project(':qna:OpenEphyra')
 }
 
+test {
+	// OpenEphyra opens files relative to its project directory
+	workingDir 'OpenEphyra'
+}

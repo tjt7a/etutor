@@ -22,6 +22,8 @@ allprojects {
 		testCompile 'junit:junit:4.12'
 	}
 
+	// Java8 has strict javadoc html rules which breaks the build.
+	// Revert to Java7's permissive behavior.
 	if (JavaVersion.current().isJava8Compatible()) {
 		tasks.withType(Javadoc) {
 			options.addStringOption('Xdoclint:none', '-quiet')
@@ -32,7 +34,6 @@ allprojects {
 // All subprojects depend on the root project
 subprojects {
 	//startScripts.enabled = false
-
 	dependencies {
 		compile project(':')
 	}
@@ -97,6 +98,16 @@ idea {
 	project {
 		languageLevel = '1.7'
 		vcs = 'Git'
+		ipr {
+			withXml { provider ->
+				def node = provider.node.component.find { it.@name == 'JavadocGenerationManager' };
+				// Ensure gradle and idea save javadoc to same location
+				node.option.find { it.@name == 'OUTPUT_DIRECTORY' }.@value = '$PROJECT_DIR$/build/docs/javadoc';
+				// Java8 has strict javadoc html rules which breaks the build.
+				// Revert to Java7's permissive behavior.
+				node.option.find { it.@name == 'OTHER_OPTIONS' }.@value = '-Xdoclint:none -quiet';
+			}
+		}
 	}
 	module {
 		// Not using generatedSourceDirs because of
@@ -114,22 +125,23 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.14'
 }
 
+// FIXME: there must be a better way to get this list
 def exportedProjects= [
 	":",
 	":qna",
 	":qna:OpenEphyra",
 ]
 
+// Build documentation for all projects
 task alljavadoc(type: Javadoc) {
-	source exportedProjects.collect { project(it).sourceSets.main.allJava }
-	classpath = files(exportedProjects.collect { project(it).sourceSets.main.compileClasspath })
-		destinationDir = file("${buildDir}/docs/javadoc")
+	source exportedProjects.collect {
+		project(it).sourceSets.main.allJava
+	}
+	classpath = files(exportedProjects.collect {
+		project(it).sourceSets.main.compileClasspath
+	})
+	destinationDir = file("${buildDir}/docs/javadoc")
 }
-/*
-task myJavadocs(type: Javadoc) {
-	source = sourceSets.main.allJava
-}
-*/
 
 // Create gRPC interfaces for otherlanguages
 task grpcOther() {
