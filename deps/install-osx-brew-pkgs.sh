@@ -76,4 +76,5 @@ fi
 # pseudo terminal
 brew tap homebrew/dupes
 brew_install screen 
-
+brew tap Caskroom/cask
+brew_install mongodb
