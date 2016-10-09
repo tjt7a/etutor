@@ -33,30 +33,19 @@
 package ai.lucida.grpc;
 
 //Java packages
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.io.UnsupportedEncodingException;
-
-import ai.lucida.grpc.ServiceAcceptor;
-import ai.lucida.grpc.ServiceConnector;
-import ai.lucida.grpc.Request;
-import ai.lucida.grpc.Response;
-import ai.lucida.grpc.QuerySpec;
-import ai.lucida.grpc.QueryInput;
-import ai.lucida.grpc.Request;
-
-import com.google.protobuf.ByteString;
 import io.grpc.stub.StreamObserver;
+import com.google.common.util.concurrent.ListenableFuture;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test; 
+import org.junit.Test;
 
 public class ServiceTest {
 	public class SyncHandler extends LucidaServiceGrpc.LucidaServiceImplBase  {
 		@Override
 		public void infer(Request request, StreamObserver<Response> responseObserver) {
+			Response reply = Response.newBuilder().setMsg("got infer").build();
+			responseObserver.onNext(reply);
+			responseObserver.onCompleted();
 		}
 	}
 
@@ -65,18 +54,39 @@ public class ServiceTest {
 
 		try {
 			ServiceAcceptor server = new ServiceAcceptor(9001, new SyncHandler());
-			server.stop();
+			server.start();
+
+			ServiceConnector client = new ServiceConnector("localhost", 9001);
+			Request req = Request.newBuilder().build();
+			String resp = client.infer(req);
+			assertTrue(resp.equals("got infer"));
+
+			assertTrue(client.shutdown().blockUntilShutdown(3000));
+			assertTrue(server.shutdown().blockUntilShutdown(3000));
 		} catch(Exception e) {
 			fail(e.getMessage());
 		}
 	}
 
+	@Test
 	public void testAsyncClientSyncServer() {
-	}
+		try {
+			ServiceAcceptor server = new ServiceAcceptor(9002, new SyncHandler());
+			server.start();
 
-	public void testSyncClientAsyncServer() {
-	}
+			ServiceConnector client = new ServiceConnector("localhost", 9002);
+			Request req = Request.newBuilder().build();
 
-	public void testAsyncClientAsyncServer() {
+			ListenableFuture<Response> rpc = client.getFutureStub().infer(req);
+
+			Response resp = rpc.get();
+			assertTrue(resp != null);
+			assertTrue(resp.getMsg().equals("got infer"));
+
+			assertTrue(client.shutdown().blockUntilShutdown(3000));
+			assertTrue(server.shutdown().blockUntilShutdown(3000));
+		} catch(Exception e) {
+			fail(e.getMessage());
+		}
 	}
 }
