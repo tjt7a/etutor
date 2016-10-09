@@ -73,7 +73,7 @@ but if you want to build java without make then run `gradle build`.
 
 #### Build Javadocs
 
-Run `gradle alljavadoc`. The docs will be located at build/doc/. 
+Run `gradle alljavadoc`. The docs will be located at build/docs/. 
 
 #### IntelliJ Integration for Java Code
 
@@ -87,7 +87,7 @@ To execute all tests run `make test`.
 
 ## Adding Backend Services
 
-### Java Services Based on Externl Source
+### Java Services Based on External Source
 
 1. Create a new directory under the top level directory. Name it according
    to the service provided. We refer to it as \<service-name\>.
