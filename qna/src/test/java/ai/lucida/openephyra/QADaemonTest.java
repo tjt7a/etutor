@@ -9,18 +9,15 @@ import java.io.UnsupportedEncodingException;
 import ai.lucida.grpc.ServiceAcceptor;
 import ai.lucida.grpc.ServiceConnector;
 import ai.lucida.grpc.Request;
-import ai.lucida.grpc.Response;
 import ai.lucida.grpc.QuerySpec;
 import ai.lucida.grpc.QueryInput;
-import ai.lucida.grpc.Request;
 
 import ai.lucida.openephyra.QAServiceHandler;
 
 import com.google.protobuf.ByteString;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test; 
+import org.junit.Test;
 
 /*
  * A testing Client that sends a single query to OpenEphyra Server and prints the results.
@@ -55,7 +52,7 @@ public class QADaemonTest {
 	@Test
 	public void testClientServer() {
 		// Collect the port number.
-		int port = 8083;
+		int port = 9083;
 
 		// User.
 		String LUCID = "Clinc";
@@ -82,6 +79,7 @@ public class QADaemonTest {
 				add(query_input);
 			}};
 
+			System.out.println("Starting QADaemonTest...");
 			server = new ServiceAcceptor(port, new QAServiceHandler());
 			server.start();
 			System.out.println("QA at port " + port);
@@ -120,12 +118,18 @@ public class QADaemonTest {
 			assertTrue(answer == "");
 			System.out.println(answer);
 
-			client.shutdown(10);
+			client.shutdown();
+			assertTrue(client.blockUntilShutdown(3000));
 		} catch (Exception e) {
 			fail(e.getMessage());
 		}
-
-		if (server != null)
-			server.stop();
+		try {
+			if (server != null) {
+				server.shutdown();
+				assertTrue(server.blockUntilShutdown(3000));
+			}
+		} catch (Exception e) {
+			fail(e.getMessage());
+		}
 	}
 }
